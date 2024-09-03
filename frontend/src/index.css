@@ -3,24 +3,39 @@
   --link-visited-color:  #5b4c5f;
   --link-hover-color:rgb(118, 178, 187);
   --link-active-color:rgb(118, 178, 187);
+  --background:#000315;
+  --text-color:#c7c7fa;
+  --primary-color:#48969d;
+  --secondary-color:#005a75;
+  --accent-color:#f28c8c;
+  --theme-btn-background:#c7c7fa;
+  --opposite-text-color:#050538;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--text-color);
+  background-color: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+ 
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* color: #213547;
+    background-color: var(--background); */
+    --background:#fff;
+    --text-color:#050538;
+    --primary-color:#62b0b7;
+    --secondary-color:#8ae4ff;
+    --accent-color:#730d0d;
+    --theme-btn-background:#24292f;
+    --opposite-text-color:#c7c7fa;
   }
 
 }
