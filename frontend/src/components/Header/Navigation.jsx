@@ -35,7 +35,7 @@ export default function Navigation() {
           <NavLink className={classes["navigation__item__link"]}>
             {" "}
             <i className="bi bi-person-circle"></i>
-            Log In
+           
           </NavLink>
         </li>
       </ul>

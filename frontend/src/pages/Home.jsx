@@ -1,5 +1,7 @@
+import Slider from "../components/BooksSlider/Slider";
+
 export default function HomePage(){
-    return <>
-        <p>world <i class="bi bi-airplane-engines-fill"></i></p>
-    </>
+    return <main>
+        <Slider/>
+    </main>
 }
