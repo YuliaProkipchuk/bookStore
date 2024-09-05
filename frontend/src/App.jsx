@@ -6,7 +6,8 @@ import HomePage from './pages/Home'
 
 const router = createBrowserRouter([
   {path:'/', element:<Root/>, children:[
-    {index:true, element:<HomePage/>}
+    {index:true, element:<HomePage/>},
+    {path:'auth'}
   ]}
 ])
 function App() {
