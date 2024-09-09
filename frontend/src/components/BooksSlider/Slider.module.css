@@ -38,18 +38,19 @@
 .slider-container {
     --x:0px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 254%;
+    flex-wrap: nowrap;
     transform: translateX(var(--x));
     transition: all .5s;
     margin-bottom: 20px;
-
+    
 }
 
 .slider-item {
     min-height: 450px;
     /* padding-top: 20px; */
-    width: 330px;
+    width: 300px;
     text-align: center;
     /* display: flex;
     flex-direction: column;
@@ -91,6 +92,8 @@
     border-radius: 30px;
     min-height: 150px;
     padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 @keyframes hoverBook {
     0%{
@@ -110,9 +113,9 @@
     justify-content: center;
 }
 .bookpic {
-    height: 200px;
+    height: 100%;
     aspect-ratio: 1;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .slider-item .book-title {
@@ -131,6 +134,7 @@
 }
 
 .slider-item .price-container {
+    margin-top: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
