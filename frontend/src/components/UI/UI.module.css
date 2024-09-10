@@ -126,3 +126,22 @@
 
     }
 }
+.book{
+    height: 300px;
+    width: 100%;
+}
+.book_img{
+    --url:url('');
+    background: 
+    var(--url),
+    url(../../assets/bike-guy-wattpad-book-cover.png);
+    background-size: auto 100%;
+    background-position: top;background-repeat: no-repeat;
+    /* background-size: contain; */
+    height: 300px;
+    width: 300px;
+    background-blend-mode: multiply;
+    mask-image: url(../../assets/bike-guy-wattpad-book-cover.png);
+    mask-size: auto 100%;
+    /* transform: rotateZ(40deg) rotateY(20deg); */
+}

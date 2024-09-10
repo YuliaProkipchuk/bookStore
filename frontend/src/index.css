@@ -27,12 +27,24 @@
 dialog{
   position: fixed;
   top: 10%;
-  left: 18%;
+  /* left: 18%; */
 }
 dialog::backdrop{
   background: #000000c7;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 100px;
+}
 @media (prefers-color-scheme: light) {
   :root {
     /* color: #213547;

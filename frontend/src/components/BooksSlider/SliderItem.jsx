@@ -3,6 +3,7 @@ import classes from "./Slider.module.css";
 import bookImg from "../../assets/bike-guy-wattpad-book-cover.png";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cart";
+import BookCover from "../UI/BookCover";
 export default function SliderItem({ book }) {
   const dispatch = useDispatch()
   return (
@@ -14,6 +15,7 @@ export default function SliderItem({ book }) {
           className={classes["bookpic"]}
         />
       </div>
+      {/* <BookCover img={book?.cover_img}/> */}
       <div className={classes["item-info"]}>
         <h3 className={classes["book-title"]}>
           {book?.title || " The Witcher. 2. Sword of Destiny"}

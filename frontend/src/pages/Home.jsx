@@ -1,5 +1,5 @@
 import Slider from "../components/BooksSlider/Slider";
-import { useLoaderData, useRouteLoaderData } from "react-router-dom";
+import { json, useLoaderData, useRouteLoaderData } from "react-router-dom";
 import { generateBookPrice } from "../util/generateBookPrice";
 
 export default function HomePage() {
@@ -8,7 +8,7 @@ export default function HomePage() {
 
   return (
     <main>
-      <Slider books={data}/>
+      <Slider books={data} />
     </main>
   );
 }
@@ -18,8 +18,19 @@ export async function loader({ request, params }) {
     // 'https://openlibrary.org/search.json?q=publish_date:2023&limit=10'
     // 'https://openlibrary.org/search.json?q=publish_year=2024&limit=10'
   );
+  if (response.status === 404) {
+    throw new Response("Not Found", { status: 404 });
+  }
   const data = await response.json();
-  console.log(data)
+  if (!data) {
+    throw json(
+      {
+        message: "Fetching failed",
+      },
+      { status: 401 }
+    );
+  }
+  console.log(data);
   const { docs } = data;
   // const books = docs.map((book) => ({
   //   id: book.key.replace('/works/',''),
@@ -32,16 +43,19 @@ export async function loader({ request, params }) {
   //   cover_img:book.cover_i?`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`:''
   // }));
   const { works } = data;
+
   const books = works.map((book) => ({
-    id: book.key.replace('/works/',''),
+    id: book.key.replace("/works/", ""),
     author: book.authors[0].name,
     title: book.title,
     year: book.publish_year,
     ratings_average: book.ratings_average,
     ratings_count: book.ratings_count,
     cover_id: book.cover_id,
-    cover_img:book.cover_id?`https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`:'',
-    price:generateBookPrice().toFixed(2)
+    cover_img: book.cover_id
+      ? `https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`
+      : "",
+    price: generateBookPrice(),
   }));
   return books;
 }

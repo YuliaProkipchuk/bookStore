@@ -17,7 +17,7 @@ export default function Navigation() {
           closeModal={() => setOpenModal(false)}
         />
       )}
-      {isCartOpen && (
+      {(isCartOpen && cart>0 )&& (
         <CartModal
           isOpen={isCartOpen}
           closeModal={() => setIsCartOpen(false)}

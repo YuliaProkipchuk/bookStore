@@ -25,8 +25,8 @@ export default function Slider({books}) {
           </button>
         </div>
       </div>
-      <article class={classes["slider-container"]} style={{ "--x": `${x}px` }}>
-        {books.map(book=><SliderItem book={book}/>)}
+      <article className={classes["slider-container"]} style={{ "--x": `${x}px` }}>
+        {books.map(book=><SliderItem key={book.id} book={book}/>)}
       </article>
     </section>
   );
