@@ -1,6 +1,6 @@
 .slider {
     height: 620px;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .slider-heading_controlls{
@@ -26,20 +26,25 @@
     height: 90px;
     justify-content: space-between;
     padding: 18px;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    margin-bottom: 15px;
 }
 
 .slider-heading h2 {
-    font-family: "Comfortaa";
+    /* font-family: "Comfortaa"; */
     font-size: 40px;
     text-align: center;
     margin-bottom: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .slider-container {
     --x:0px;
     display: flex;
     justify-content: space-around;
-    width: 254%;
+    width: 253%;
     flex-wrap: nowrap;
     transform: translateX(var(--x));
     transition: all .5s;
@@ -52,6 +57,7 @@
     /* padding-top: 20px; */
     width: 300px;
     text-align: center;
+    text-decoration: none;
     /* display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,9 +72,10 @@
     0px 14px 24px -12px rgba(9, 127, 131, 0.282),
     0px 18px 28px -18px rgba(21, 184, 189, 0.282);
     border-radius: 30px;
-    overflow: hidden;
+    border: 1px solid rgb(169, 169, 169);
+    /* overflow-x: hidden; */
 }
-.slider-item::before{
+/* .slider-item::before{
     content: '';
     position: absolute;
     top: 0;
@@ -77,11 +84,15 @@
     height: 10px;
     background-color: var(--text-color);
     opacity: 0;
-}
+} */
 .slider-item:hover {
     cursor: pointer;
     transform: scale(1.01);
-  
+    /* overflow-y: auto; */
+}
+.slider-item:hover img{
+    transform: translateY(-30px);
+    filter: drop-shadow(0 12px 20px #00000056);
 
 }
 .slider-item:hover::before{
@@ -90,7 +101,7 @@
 .item-info{
     background-color: #fff;
     border-top: 1px solid;
-    border-radius: 30px;
+    /* border-radius: 30px; */
     min-height: 150px;
     padding: 15px;
     display: flex;
@@ -114,9 +125,10 @@
     justify-content: center;
 }
 .bookpic {
-    height: 99%;
+    height: 90%;
     aspect-ratio: 1;
     object-fit: contain;
+    transition: transform .5s;
 }
 
 .slider-item .book-title {

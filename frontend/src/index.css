@@ -24,6 +24,14 @@
   -moz-osx-font-smoothing: grayscale;
  
 }
+#root{
+  display: flex;
+  flex-direction: column; 
+  min-height: 100vh;
+}
+a{
+  text-decoration: none;
+}
 dialog{
   position: fixed;
   top: 10%;

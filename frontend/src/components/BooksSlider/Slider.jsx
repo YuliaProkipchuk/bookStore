@@ -2,7 +2,7 @@ import SliderItem from "./SliderItem";
 import classes from "./Slider.module.css";
 import { useState } from "react";
 const SIZE = 10;
-const WIDTH = 376;
+const WIDTH = 378;
 export default function Slider({books}) {
   const [x, setX] = useState(0);
 

@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removefromCart } from "../../store/cart";
+import { useSelector } from "react-redux";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 export default function CartModal({ isOpen, closeModal }) {
@@ -30,7 +29,7 @@ export default function CartModal({ isOpen, closeModal }) {
               ))}
             </ul>
             <div className={classes.cart_footer}>
-              <span>
+              <span onClick={closeModal}>
                 <i class="bi bi-arrow-left-short"></i> Back to shopping
               </span>
               <div className={classes.order}>

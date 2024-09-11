@@ -151,3 +151,10 @@
     align-items: center;
     justify-content: space-around;
 }
+.cart_footer span{
+    transition: text-decoration .5s;
+}
+.cart_footer span:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

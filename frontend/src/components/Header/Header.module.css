@@ -88,10 +88,11 @@ nav::after{
 .sale {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: calc(100% - 40px);
     padding: 20px 0;
     margin-bottom: 40px;
     position: relative;
+    margin: 20px;
   }
   .sale::before {
     content: "";

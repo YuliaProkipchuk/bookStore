@@ -1,23 +1,33 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import {createBrowserRouter, RouterProvider} from 'react-router-dom'
-import './App.css'
-import Root from './pages/Root'
-import HomePage, {loader as homeLoader} from './pages/Home'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./App.css";
+import Root from "./pages/Root";
+import HomePage, { loader as homeLoader } from "./pages/Home";
 import Error from "./pages/Error";
+import BookPage, {loader as bookLoader} from "./pages/Book";
 
 const router = createBrowserRouter([
-  {path:'/', element:<Root/>, errorElement:<Error/>, children:[
-    {index:true, element:<HomePage/>, loader:homeLoader},
-    {path:'auth'}
-  ]}
-])
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+        errorElement: <Error />,
+        loader: homeLoader,
+      },
+      { path: "auth" },
+      { path: "books/:bookId", element: <BookPage />, loader:bookLoader },
+    ],
+  },
+]);
 function App() {
-
   return (
     <>
-     <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
