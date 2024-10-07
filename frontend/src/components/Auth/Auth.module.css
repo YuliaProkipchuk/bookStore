@@ -4,7 +4,8 @@
     display: flex;
     border: none;
     color: var(--text-color);
-
+    top: 10%;
+    left: 18%;
 }
 .auth_form i{
     /* color: aqua; */

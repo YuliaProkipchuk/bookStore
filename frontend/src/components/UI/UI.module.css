@@ -1,12 +1,161 @@
-.animated_box{
+.animated_box {
     width: 50%;
     height: 100%;
     background-color: rgb(163, 218, 247);
-    
+    /* transform-style: preserve-3d; */
+    overflow: hidden;
+    position: relative;
 }
-.bookMockUp{
+
+.animated_box p {
+    font-size: 2rem;
+    position: absolute;
+    width: 300px;
+    text-align: center;
+    transform: translateY(200px) translateX(130px);
+    font-family: 'Comfortaa', cursive;
+
+    font-weight: 700;
+    z-index: 1;
+}
+
+.box {
+    transform: rotateZ(0deg);
+    perspective: 600px;
+    animation: rotate 60s infinite forwards;
+}
+
+.box:hover {}
+
+@keyframes rotate {
+
+    0%,
+    100% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.bookMockUp {
     width: 150px;
+    transform-origin: center
 }
-.bookMockUp>img{
+
+.bookMockUp:nth-of-type(1) {
+    transform: translateX(300px) translateY(60px) translateZ(-44px) rotateX(0deg) rotateY(180deg);
+    animation: float1 60s infinite;
+}
+
+.bookMockUp:nth-of-type(2) {
+    transform: translateX(50px) translateY(20px) translateZ(-4px) rotateX(0deg) rotateY(0deg);
+    animation: float2 60s infinite;
+}
+
+.bookMockUp:nth-of-type(3) {
+    transform:  translateX(200px) translateY(20px) translateZ(-44px) rotateZ(7deg) rotateX(-160deg);
+    animation: float3 60s infinite;
+
+}
+
+.bookMockUp>img {
     width: 100%;
+}
+
+@keyframes float1 {
+
+    /* 0%, 100%{
+     transform: translateX(300px) translateY(60px) translateZ(-44px) rotateX(0deg) rotateY(180deg) ;
+    }
+    40%{
+        transform: translateX(200px) translateY(260px) translateZ(44px)  rotateZ(7deg) rotateX(-160deg) ;
+    }
+    70%{
+    transform: translateX(50px) translateY(20px) translateZ(-4px) rotateX(0deg)  ;
+
+    } */
+    0% {
+        transform: translateX(300px) translateY(60px) translateZ(-44px) rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+    }
+
+    40% {
+        transform: translateX(300px) translateY(60px) translateZ(44px) rotateX(0deg) rotateY(180deg) rotateZ(180deg);
+
+    }
+
+    100% {
+        transform: translateX(300px) translateY(60px) translateZ(-44px) rotateX(0deg) rotateY(180deg) rotateZ(360deg);
+    }
+}
+
+@keyframes float2 {
+    0% {
+        transform: translateX(50px) translateY(20px) translateZ(-4px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+
+    40% {
+        transform: translateX(50px) translateY(20px) translateZ(-4px) rotateX(0deg) rotateY(0deg) rotateZ(180deg);
+
+    }
+    50%{
+        transform: translateX(50px) translateY(20px) translateZ(44px) rotateX(0deg) rotateY(0deg) rotateZ(180deg);
+
+    }
+    100% {
+        transform: translateX(50px) translateY(20px) translateZ(-4px) rotateX(0deg) rotateY(0deg) rotateZ(360deg);
+
+    }
+}
+@keyframes float3 {
+    0% {
+        transform:  translateX(200px) translateY(20px) translateZ(-44px) rotateZ(7deg) rotateX(-160deg);
+    }
+
+    40% {
+        transform:  translateX(200px) translateY(20px) translateZ(-44px) rotateZ(180deg) rotateX(-160deg);
+
+    }
+    /* 50%{
+        transform: translateZ(-44px) translateX(200px) translateY(20px) rotateZ(7deg) rotateX(-160deg);
+
+    } */
+    100% {
+        transform:  translateX(200px) translateY(20px) translateZ(-44px) rotateZ(360deg) rotateX(-160deg);
+
+    }
+}
+.book{
+    height: 30px;
+    /* width: 100%; */
+}
+.book_img::before{
+    content: '';
+    position: absolute;
+    background-color: #fff;
+    width: calc(var(--rating) / 5 * 100%);
+    height: 100%;
+    z-index: -1;
+    mask-image: url(../../assets/star-fill.svg);
+    mask-size: auto 100%;
+}
+.book_img{
+    --rating:0;
+   position: relative;
+    /* background: 
+    #fff; */
+    /* url(../../assets/star-fill.svg); */
+    background: url(../../assets/star.svg);
+    background-size: auto 100%;
+    background-position: top;
+    /* background-size: contain; */
+    height: 30px;
+    width: 150px;
+    background-blend-mode: multiply;
+    /* mask-image: url(../../assets/star-fill.svg);
+    mask-size: auto 100%; */
+    /* mask-border: 2px solid black; */
+    /* transform: rotateZ(40deg) rotateY(20deg); */
+    overflow: hidden;
 }

@@ -1,8 +1,11 @@
 import classes from "./Auth.module.css";
 import AnimatedSection from "../UI/AnimatedSection";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import Login from "./Login";
+import SignUp from "./SignUp";
 export default function AuthModal({ openModal, closeModal }) {
+  const [isRegistered, setIsRegistered] = useState(true)
   const dialogRef = useRef(null);
   useEffect(() => {
     if (openModal) {
@@ -25,24 +28,13 @@ export default function AuthModal({ openModal, closeModal }) {
           <i class="bi bi-x-lg" onClick={closeModal}></i>
             <div className={classes.text_div}>
               <h2>welcome back</h2>
-              <p className={classes.sign_text}>Sign up</p>
+              <p className={classes.sign_text} onClick={()=>setIsRegistered(prev=>!prev)}>{isRegistered?'Sign up':'Log in'}</p>
             </div>
 
             <form action="">
-              <div className={classes.auth_input}>
-                <input type="text" name="login" id="login" placeholder="" />
-                <label htmlFor="login"> Login</label>
-              </div>
-              <div className={classes.auth_input}>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder=""
-                />
-                <label htmlFor="password"> Password</label>
-              </div>
-              <button className={classes.auth_btn}>Continue</button>
+              {isRegistered && <Login/>}
+              {!isRegistered && <SignUp/>}
+              <button className={classes.auth_btn}>Continue</button> 
             </form>
           </div>
         </dialog>,
