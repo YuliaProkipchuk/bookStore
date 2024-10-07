@@ -37,10 +37,10 @@ export const cartSlice = createSlice({
             state.sum-=action.payload.price
         },
         deleteFromCart(state, action) {
-            state.total--;
+            state.total-=action.payload.quantity;
             state.items = state.items.filter(book => book.id !== action.payload.id);
             state.sum-=action.payload.totalPrice
-
+            
         }
     }
 })

@@ -2,7 +2,11 @@
     height: 620px;
     overflow-x: hidden;
 }
-
+.carousel{
+    min-height: 470px;
+    width: 99%;
+    margin: auto;
+}
 .slider-heading_controlls{
     display: flex;
     gap: 20px;
@@ -44,7 +48,10 @@
     --x:0px;
     display: flex;
     justify-content: space-around;
-    width: 253%;
+    gap: 90px;
+    width: 3771px;
+    /* width: 253%; */
+    overflow: hidden;
     flex-wrap: nowrap;
     transform: translateX(var(--x));
     transition: all .5s;
@@ -55,7 +62,9 @@
 .slider-item {
     min-height: 450px;
     /* padding-top: 20px; */
+    /* width: 8%; */
     width: 300px;
+    /* max-width: 300px; */
     text-align: center;
     text-decoration: none;
     /* display: flex;
@@ -87,16 +96,19 @@
 } */
 .slider-item:hover {
     cursor: pointer;
-    transform: scale(1.01);
+    /* transform: scale(1.01); */
+    /* scale: 1.01; */
     /* overflow-y: auto; */
 }
 .slider-item:hover img{
-    transform: translateY(-30px);
+    transform: translateY(-35px);
     filter: drop-shadow(0 12px 20px #00000056);
+    position: relative;
+    z-index: 9;
 
 }
 .slider-item:hover::before{
-    animation: hoverBook 1s ease-in-out forwards;
+    /* animation: hoverBook 1s ease-in-out forwards; */
 }
 .item-info{
     background-color: #fff;

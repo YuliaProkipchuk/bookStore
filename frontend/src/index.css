@@ -55,8 +55,7 @@ dialog::backdrop{
 }
 @media (prefers-color-scheme: light) {
   :root {
-    /* color: #213547;
-    background-color: var(--background); */
+
     --background:#fff;
     --text-color:#050538;
     --primary-color:#62b0b7;

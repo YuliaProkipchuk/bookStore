@@ -23,7 +23,7 @@
 .cart_item {
     width: 95%;
     border-radius: 5px;
-    background: #eeeeee;
+    /* background: #eeeeee; */
     box-shadow: -5px 5px 10px #cccccc,
         5px -5px 10px #ffffff;
     height: 150px;
@@ -112,13 +112,13 @@
     position: absolute;
     right: 10px;
     top: 10px;
-    background-color: rgb(244, 193, 193);
     width: 20px;
     aspect-ratio: 1;
-    border-radius: 50%;
-    color: var(--accent-color);
+    color: rgb(4, 3, 11);
     border: none;
     z-index: 999;
+    background-color: transparent;
+    font-size: 1rem;
 }
 .delItem_btn:hover{
     scale: 1.1;
@@ -135,15 +135,22 @@
     width: 70%;
 }
 .order button{
-    text-transform: uppercase;
-    background-color: var(--primary-color);
+    text-transform: capitalize;
+    color: #fff;
+    background-color: #1f1f1f;
     width: 25%;
     aspect-ratio: 5/1;
-    border-radius: 100px;
+    border-radius: 3px;
     border: none;
     font-size: 1rem;
     letter-spacing: 1px;
     margin-top: 10px;
+    transition: background-color .5s;
+}
+.order button:hover{
+    cursor: pointer;
+    background-color: #626161;
+
 }
 .cart_footer{
     display: flex;

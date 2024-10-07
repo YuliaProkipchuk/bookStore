@@ -1,27 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
-header {
-    padding: 20px;
-}
-h1{
-    text-transform: uppercase;
-    text-align: center;
-    font-family: 'Comfortaa', cursive;
-    color: #5b4c5f;
-    font-size: 40px;
-}
-.bi-book-half{
-    margin-right: 5px;
-    color: #201321;
+
+.color-header {
+  /* padding: 20px; */
+  background: var(--primary-color);
+  height: 80px;
 }
 
-nav{
-    height: 80px;
-    width: 100%;
-    position: relative;
-   
-   
+/* h1 {
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Comfortaa', cursive;
+  color: #5b4c5f;
+  font-size: 40px;
+} */
+
+.bi-book-half {
+  margin-right: 5px;
+  color: #201321;
 }
-nav::before{
+
+nav {
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  z-index: 999;
+
+}
+
+/* nav::before{
     content:'';
     width: 100%;
     position: absolute;
@@ -41,132 +47,209 @@ nav::after{
     animation-name: show;
     animation-duration: 1s;
     right: 0;
+} */
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  list-style-type: none;
+  font-size: 1rem;
+  margin: 0 auto;
+  height: 70px;
+  width: 80%;
+  /* margin-top: 35px; */
+  font-family: 'Comfortaa', cursive;
+  line-height: 70px;
+  color: #fff;
 }
-.navigation{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    list-style-type: none;
-    font-size: 16px;
-    margin: 0 auto;
-    height: 70px;
-    width: 80%;
-    margin-top: 35px;
-    font-family: 'Comfortaa', cursive;
-    line-height: 70px;
+.big{
+  display: block;
 }
-.navigation__item__link{
-    text-decoration: none;
+.navigation__item__link {
+  text-decoration: none;
 }
-.navigation__item__link:link{
-    color: var(--link-color);
+
+.navigation__item__link:link {
+  color: var(--link-color);
 }
-.navigation__item__link:visited{
-    color: var(--link-visited-color);
+
+.navigation__item__link:visited {
+  color: var(--link-visited-color);
 }
-.navigation__item__link:hover{
-    color: var(--link-hover-color);
+
+.navigation__item__link:hover {
+  color: var(--link-hover-color);
 }
-.navigation__item__link:active{
-    color: var(--link-active-color);
+
+.navigation__item__link:active {
+  color: var(--link-active-color);
 }
-.navigation__item__link i{
-    font-size: 1.5rem;
+
+.navigation__item__link i {
+  font-size: 1.5rem;
 }
-.homeLink{
-    text-decoration: none;
-    color: #5b4c5f;
+.navigation a{
+  color: #fff;
+
 }
+.homeLink {
+  text-decoration: none;
+  color: #5b4c5f;
+}
+
 @keyframes show {
-    0%{
-        width: 0;
-    }
-    100%{
-        width: 100%;
-    }
-}
-.sale {
-    display: flex;
-    justify-content: space-around;
-    width: calc(100% - 40px);
-    padding: 20px 0;
-    margin-bottom: 40px;
-    position: relative;
-    margin: 20px;
+  0% {
+    width: 0;
   }
-  .sale::before {
-    content: "";
+
+  100% {
     width: 100%;
-    height: 300px;
-    background-color: #61b0b7;
-    position: absolute;
-    top: 0;
-    left: 0px;
-    z-index: -1;
-    animation-name: slideRight;
-    animation-duration: 1s;
   }
-  .sale__offer {
-    width: 500px;
-    height: 420px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    animation-name: slide;
-    animation-duration: 1s;
+}
+
+.sale {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  /* width: calc(100% - 40px); */
+  /* padding: 20px 0; */
+  margin-bottom: 40px;
+  position: relative;
+  /* margin: 20px; */
+  width: 100%;
+}
+
+.sale::before {
+  content: "";
+  width: 100%;
+  height: 90%;
+  background-color: #61b0b7;
+  position: absolute;
+  top: 0;
+  left: 0px;
+  z-index: -1;
+  animation-name: slideRight;
+  animation-duration: 1s;
+}
+
+.sale__bookspic{
+  height: 80%;
+  align-self: flex-end;
+  width: 42%;
+}
+.sale__bookspic img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+.sale__offer {
+  width: 32%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  animation-name: slide;
+  animation-duration: 1s;
+}
+
+.sale__offer__header {
+  font-family: "Old Standard TT", serif;
+  font-size: 4.5rem;
+  color: rgb(8, 1, 41);
+}
+
+.sale__offer__paragraph {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  /* height: 25%; */
+}
+
+.sale__offer__button {
+  width: 45%;
+  height: 12%;
+  background-color: var(--theme-btn-background);
+  display: block;
+  font-family: "Roboto", sans-serif;
+  line-height: 3.5;
+  text-align: center;
+  text-decoration: none;
+  text-transform: lowercase;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  color: var(--opposite-text-color);
+  transition: scale .5s cubic-bezier(0, 2.06, 1, -0.8);
+}
+
+.sale__offer__button:hover {
+  cursor: pointer;
+  scale: 1.03;
+}
+
+.sale__offer__bookpic {
+  height: 480px;
+  animation-name: slide;
+  animation-duration: 1s;
+}
+
+section:not(.benefits) {
+  padding: 0 18px;
+}
+.nav-search input, .nav-search button{
+  background: transparent;
+  border: none;
+  color: #fff;
+
+
+}
+.nav-search input:focus{
+  outline: none;
+  border: none;
+  border-bottom: 1px solid;
+}
+.nav-search input::placeholder{
+  color: #fff;
+}
+.nav-search button{
+  margin-right: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+
+}
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(-178px);
   }
-  .sale__offer__header{
-    font-family: "Old Standard TT", serif;
-    font-size: 80px;
-    color: rgb(8, 1, 41);
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
   }
-  .sale__offer__paragraph{
-    font-family: "Roboto", sans-serif;
-    font-size: 20px;
-    height: 100px;
+}
+
+@keyframes slideRight {
+  0% {
+    width: 0;
   }
-  .sale__offer__button{
-    width: 200px;
-    height: 70px;
-    background-color: var(--theme-btn-background);
-    display: block;
-    font-family: "Roboto", sans-serif;
-    line-height: 70px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: lowercase;
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    color: var(--opposite-text-color);
-    transition: scale .5s cubic-bezier(0,2.06,1,-0.8);
+
+  100% {
+    width: 100%;
   }
-  .sale__offer__button:hover{
-    cursor: pointer;
-    scale: 1.03;
+}
+@media screen and (max-width:1020px) {
+  html{
+    font-size: 13px;
   }
-  .sale__offer__bookpic{
-    height: 480px;
-    animation-name: slide;
-    animation-duration: 1s;
+}
+@media screen and (max-width:675px) {
+  html{
+    font-size: 10px;
   }
-  section:not(.benefits) {
-    padding: 0 18px;
+  .sale{
+    height: 50vh;
   }
-  @keyframes slide {
-    0%{
-      opacity: 0;
-      transform: translateY(-178px);
-    }
-    100%{
-      opacity: 1;
-      transform: translateY(0px);
-    }
+  .big{
+    display: none;
   }
-  @keyframes slideRight {
-    0%{
-      width: 0;
-    }
-    100%{
-      width: 100%;
-    }
-  }
+}

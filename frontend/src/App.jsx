@@ -5,6 +5,7 @@ import Root from "./pages/Root";
 import HomePage, { loader as homeLoader } from "./pages/Home";
 import Error from "./pages/Error";
 import BookPage, {loader as bookLoader} from "./pages/Book";
+import AllBooksPage, {loader as allBooksLoader} from "./pages/AllBooks";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
         loader: homeLoader,
       },
       { path: "auth" },
+      {path:'books', element:<AllBooksPage/>, loader:allBooksLoader},
       { path: "books/:bookId", element: <BookPage />, loader:bookLoader },
     ],
   },

@@ -1,49 +1,76 @@
-import { useLoaderData, useParams } from "react-router-dom"
-import { generateBookPrice } from "../util/generateBookPrice";
+import { useLoaderData, useParams } from "react-router-dom";
+import classes from "../components/BookPage/Book.module.css";
+import BookCover from "../components/UI/BookCover";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cart";
+export default function BookPage() {
+  const book = useLoaderData();
+  const dispatch = useDispatch();
 
-export default function BookPage(){
-    const {bookId} = useParams();
-    const data = useLoaderData()
-    console.log(data);
-    
-    return <main>
-        hello {bookId}
-        <img src="" alt="" />
+  return (
+    <main>
+      <div className={classes["blur-background"]}>
+        <img src={book.image_url} alt="" />
+        <div className={classes["blur-mask"]}></div>
+        <div className={classes.content}>
+          <div className={classes["coverImg-wrapper"]}>
+            <img src={book.image_url} alt="" />
+          </div>
+
+          <div className={classes["book-credits"]}>
+            <h1>{book.title}</h1>
+            <p>{book.authors}</p>
+            <div className={classes.rating}>
+              <BookCover
+                rating={book.rating}
+                rating_count={book.rating_count}
+              />
+              <span>{book.rating_count}</span>
+            </div>
+          </div>
+          <div className={classes["bookpage-btns"]}>
+            <button
+              type="button"
+              className={classes["buy-btn"]}
+              onClick={() => dispatch(addToCart(book))}
+            >
+              Buy{" "}
+              {new Intl.NumberFormat("uk-UA", {
+                style: "currency",
+                currency: "UAH",
+              }).format(book.price)}
+            </button>
+            <button type="button" className={classes["add-toWishlist-btn"]}>
+              <i className="bi bi-bookmark-fill"></i>To Wishlist
+            </button>
+          </div>
+        </div>
+      </div>
+      <section className={classes["book-details"]}>
+        <article className={classes.about}>
+          <div className={classes["book-description"]}>
+            <h3>About</h3>
+
+            <p>{book.description}</p>
+          </div>
+        </article>
+      </section>
     </main>
+  );
 }
-export async function loader({params, request}){
-    try {
-        // const res = await fetch (`https://openlibrary.org/works/${params.bookId}.json`);
-        const res = await fetch (`https://openlibrary.org/search.json?q=/works/${params.bookId}`);
-        const data = await res.json();
-        console.log(res);
-        console.log(data);
-        const { docs } = data;
-        const book = docs.filter(b=>b.key===`/works/${params.bookId}`).map((book) => ({
-          id: book.key.replace('/works/',''),
-          author: book.author_name,
-          title: book.title,
-          year: book.publish_year,
-          ratings_average: book.ratings_average,
-          ratings_count: book.ratings_count,
-          cover_id: book.cover_i,
-          cover_img:book.cover_i?`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`:'',
-          price: generateBookPrice(),
-    
-        }))
-        // const authorReq = await fetch(`https://openlibrary.org${data.authors[0].author.key}.json`);
-        // const author = await authorReq.json();
-        // console.log(author);
-        // const book = {
-        //     id:params.bookId,
-        //     title: data.title,
-        //     author: author.name,
-        //     published_year: new Date(data.created.value).getFullYear(),
-        //     subjects:data.suubjects,
-            
-        // }
-        return book;
-    } catch (error) {
-        return error;
-    }
+
+export async function loader({ params, request }) {
+  try {
+    let response = await fetch(
+      `https://example-data.draftbit.com/books/${params.bookId}`
+    );
+    const pricesRespponse = await fetch("http://localhost:8080/prices");
+    const prices = await pricesRespponse.json();
+    const book = await response.json();
+    book.price = prices[book.id + 1];
+    book.genre_list = book.genre_list.split(',')
+    return book;
+  } catch (error) {
+    return error;
+  }
 }

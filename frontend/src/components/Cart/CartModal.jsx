@@ -3,6 +3,8 @@ import { createPortal } from "react-dom";
 import { useSelector } from "react-redux";
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
+// import { loadStripe } from '@stripe/stripe-js';
+// import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 export default function CartModal({ isOpen, closeModal }) {
   const cart = useSelector((state) => state.cart);
   const dialogRef = useRef(null);
@@ -30,7 +32,7 @@ export default function CartModal({ isOpen, closeModal }) {
             </ul>
             <div className={classes.cart_footer}>
               <span onClick={closeModal}>
-                <i class="bi bi-arrow-left-short"></i> Back to shopping
+                <i className="bi bi-arrow-left-short"></i> Back to shopping
               </span>
               <div className={classes.order}>
               <p>

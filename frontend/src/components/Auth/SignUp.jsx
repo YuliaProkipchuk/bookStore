@@ -1,5 +1,6 @@
 import classes from './Auth.module.css';
 export default function SignUp() {
+  // const a = new Hash
   return (
     <>
       <div className={classes.auth_input}>

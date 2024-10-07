@@ -12,7 +12,8 @@ export default function SliderItem({ book }) {
       <Link to={`/books/${book.id}`}>
         <div className={classes["pic-wrapper"]}>
           <img
-            src={book?.cover_img || bookImg}
+            src={book?.image_url || bookImg}
+            // src={book?.cover_img || bookImg}
             alt=""
             className={classes["bookpic"]}
           />
@@ -26,7 +27,7 @@ export default function SliderItem({ book }) {
           </h3>
         </Link>
         <span className={classes["book-author"]}>
-          {book?.author}
+          {book?.authors}
           {/* {(book?.author && book?.author.length > 1
             ? book?.author.map((a) => `${a}, `)
             : book?.author[0]) || "Andrzej Sapkowski"} */}

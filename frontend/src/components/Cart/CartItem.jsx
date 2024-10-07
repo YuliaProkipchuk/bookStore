@@ -7,14 +7,14 @@ export default function CartItem({ book }) {
   return (
     <li className={classes.cart_item}>
       <button className={classes.delItem_btn} onClick={() => dispatch(deleteFromCart(book))}>
-        -
+      <i className="bi bi-trash"></i>
       </button>
       <div className={classes.item_img_wrapper}>
-        <img src={book?.cover_img} alt="" />
+        <img src={book?.image_url} alt="" />
       </div>
       <div className={classes.cart_item_info}>
         <p>{book.title}</p>
-        <span className={classes.item_author}>{book?.author}</span>
+        <span className={classes.item_author}>{book?.authors}</span>
         <span className={classes.item_price}>
           {new Intl.NumberFormat("uk-UA", {
             style: "currency",
