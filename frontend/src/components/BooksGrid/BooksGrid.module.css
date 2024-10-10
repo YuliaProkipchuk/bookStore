@@ -59,4 +59,22 @@
 }
 .pagination_btns{
     width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    height: 100px;
+    align-items: center;
+}
+.pagination_btns button{
+    height: 35px;
+    min-width: fit-content;
+    width: 100px;
+    border-radius: 5px;
+    transition: all .5s;
+}
+
+.pagination_btns button:not(:disabled):hover{
+    cursor: pointer;
+    background-color: rgb(5, 4, 9);
+    color: #fff;
 }

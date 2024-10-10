@@ -5,7 +5,7 @@
   --link-active-color:rgb(118, 178, 187);
   --background:#000315;
   --text-color:#c7c7fa;
-  --primary-color:#48969d;
+  --primary-color:rgb(0, 106, 255);
   --secondary-color:#005a75;
   --accent-color:#f28c8c;
   --theme-btn-background:#c7c7fa;
@@ -58,7 +58,7 @@ dialog::backdrop{
 
     --background:#fff;
     --text-color:#050538;
-    --primary-color:#62b0b7;
+    --primary-color:rgb(0, 106, 255);
     --secondary-color:#8ae4ff;
     --accent-color:#730d0d;
     --theme-btn-background:#24292f;
