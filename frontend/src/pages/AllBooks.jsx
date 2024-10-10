@@ -23,6 +23,22 @@ export default function AllBooksPage() {
   }
   return (
     <main className={classes.allbooks_main}>
+       <div className={classes.pagination_btns}>
+        <button
+          type="button"
+          onClick={openPrevPage}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <button
+          type="button"
+          onClick={openNextPage}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
       <FilterBooks genres={GENRES} setPickedGenre={setPickedGenre} />
       <Grid books={books} pickedGenre={pickedGenre} />
       <div className={classes.pagination_btns}>

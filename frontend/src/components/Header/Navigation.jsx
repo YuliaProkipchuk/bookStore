@@ -1,5 +1,7 @@
 import classes from "./Header.module.css";
 import NavItem from "./NavItem";
+import { auth } from "../../../config/firebase";
+import { signOut } from "firebase/auth";
 import { useState } from "react";
 import AuthModal from "../Auth/Modal";
 import { useSelector } from "react-redux";
@@ -27,6 +29,15 @@ export default function Navigation() {
     [0, 0.076],
     ["blur(0px)", "blur(20px)"]
   );
+  async function logout() {
+    try {
+      await signOut(auth);
+      console.log('logged out!!!');
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       {openModal && (
@@ -70,6 +81,9 @@ export default function Navigation() {
           </NavItem>
           <NavItem onClick={() => setOpenModal(true)}>
             <i className="bi bi-person-circle"></i>
+          </NavItem>
+          <NavItem className="big" onClick={logout}>
+            Logout
           </NavItem>
         </ul>
       </motion.nav>

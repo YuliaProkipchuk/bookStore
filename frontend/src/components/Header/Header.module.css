@@ -79,6 +79,7 @@ nav::after{
 
 .navigation__item__link:hover {
   color: var(--link-hover-color);
+  cursor: pointer;
 }
 
 .navigation__item__link:active {
