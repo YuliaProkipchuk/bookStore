@@ -1,50 +1,86 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { auth, db } from "../../../config/firebase";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import classes from "./Slider.module.css";
-import bookImg from "../../assets/bike-guy-wattpad-book-cover.png";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cart";
-import BookCover from "../UI/BookCover";
 import { Link } from "react-router-dom";
+import BookRating from "./BookRating";
 export default function SliderItem({ book }) {
   const dispatch = useDispatch();
+  const [addedToFavorites, setAddedToFavorites] = useState(
+    book.addedToFavorites
+  );
+
+  async function toggleFavorites(book) {
+    try {
+      const userRef = doc(db, "users", auth?.currentUser?.uid);
+
+      const user = await getDoc(userRef);
+      console.log(user.data());
+      if (user.exists()) {
+        if (!user.data().favorites.find((el) => el.id === book.id)) {
+          console.log("not foound");
+
+          await updateDoc(userRef, {
+            favorites: arrayUnion(book),
+          });
+        } else {
+          console.log("found");
+          const arr = user.data().favorites;
+          const index = arr.findIndex((el) => el.id === book.id);
+
+          await updateDoc(userRef, {
+            favorites: arrayRemove(arr[index]),
+          });
+        }
+      }
+      setAddedToFavorites((prev) => !prev);
+    } catch (error) {
+      console.log(error);
+    }
+    // setAddedToFavorites((prev) => !prev);
+  }
   return (
-    <div className={classes["slider-item"]}>
+    <div className={classes.book_card}>
       <Link to={`/books/${book.id}`}>
-        <div className={classes["pic-wrapper"]}>
-          <img
-            src={book?.image_url || bookImg}
-            // src={book?.cover_img || bookImg}
-            alt=""
-            className={classes["bookpic"]}
-          />
-        </div>
+        <img src={book?.image_url} alt={book?.title} />
       </Link>
-      {/* <BookCover img={book?.cover_img}/> */}
-      <div className={classes["item-info"]}>
+      <div className={classes.book_card_info}>
         <Link to={`/books/${book.id}`}>
-          <h3 className={classes["book-title"]}>
-            {book?.title || " The Witcher. 2. Sword of Destiny"}
-          </h3>
+          <p className={classes.book_title}>{book.title}</p>
         </Link>
-        <span className={classes["book-author"]}>
-          {book?.authors}
-          {/* {(book?.author && book?.author.length > 1
-            ? book?.author.map((a) => `${a}, `)
-            : book?.author[0]) || "Andrzej Sapkowski"} */}
+        <span className={classes.book_author}>{book.authors}</span>
+        <BookRating rating={book.rating}/>
+        <span className={classes["price-tag"]}>
+          {new Intl.NumberFormat("uk-UA", {
+            style: "currency",
+            currency: "UAH",
+          }).format(book.price)}
         </span>
-        <div className={classes["price-container"]}>
-          <span className={classes["price-tag"]}>
-            {new Intl.NumberFormat("uk-UA", {
-              style: "currency",
-              currency: "UAH",
-            }).format(book.price)}
-          </span>
+        <div className={classes.action_btns}>
           <div
             className={classes["buy-btn"]}
             onClick={() => dispatch(addToCart(book))}
           >
             <i className="bi bi-cart4"></i> Add to cart
           </div>
+          {/* <i class="bi bi-heart"></i> */}
+          <i
+            className="bi bi-heart-fill"
+            style={{
+              "--color": `${
+                addedToFavorites ? "var(--accent-color)" : "#585858"
+              }`,
+            }}
+            onClick={() => toggleFavorites(book)}
+          ></i>
         </div>
       </div>
     </div>

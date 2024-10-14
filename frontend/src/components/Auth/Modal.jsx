@@ -10,7 +10,12 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Login from "./Login";
 import SignUp from "./SignUp";
-export default function AuthModal({ openModal, closeModal }) {
+import { useLocation, useNavigate } from "react-router-dom";
+export default function AuthModal({ openModal, closeModal, setKey }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // const [key, setKey] = useState(0)
   const [isRegistered, setIsRegistered] = useState(true);
   const [userData, setUserData] = useState({
     username: "",
@@ -48,7 +53,8 @@ export default function AuthModal({ openModal, closeModal }) {
       });
     
       closeModal();
-
+      if(location.pathname!=='/') navigate('/');
+      else setKey(prev=>prev+1)
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +70,8 @@ export default function AuthModal({ openModal, closeModal }) {
       console.log(user);
       closeModal();
       console.log('logged in');
+      if(location.pathname!=='/') navigate('/');
+      else setKey(prev=>prev+1)
       
       
     } catch (error) {

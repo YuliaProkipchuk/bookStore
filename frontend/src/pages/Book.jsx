@@ -7,27 +7,81 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  getDoc,
 } from "firebase/firestore";
 import BookCover from "../components/UI/BookCover";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cart";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SimilarBooksSection from "../components/BookPage/SimilarBooksSection";
 import { auth, db } from "../../config/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 export default function BookPage() {
   const { book, similar } = useLoaderData();
   const dispatch = useDispatch();
   const [readMore, setReadMore] = useState(false);
+  const [aBook, setABook] = useState(null);
+  const [isloading, setIsLoading] = useState(true);
+  const [addedToFavorites, setAddedToFavorites] = useState(false);
 
-  async function addToWishList(book) {
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("User is signed in:", user.uid);
+        getUser();
+      } else {
+        console.log("No user is signed in");
+        setABook({
+          ...book,
+          addedToFavorites:false
+        });
+      // setAddedToFavorites(false)
+
+      }
+      // setIsLoading(false);
+    });
+
+    async function getUser() {
+      const userRef = doc(db, "users", auth?.currentUser?.uid);
+
+      const user = await getDoc(userRef);
+      if (user.exists()) {
+        setABook({
+          ...book,
+          addedToFavorites:user.data().favorites.find((el) => el.id === book.id) ? true : false,
+        })
+      }
+    }
+    return () => unsubscribe();
+  }, []);
+  async function toggleFavorites(book) {
+    setAddedToFavorites(prev=>!prev);
+
     try {
-      const user = doc(db, "users", auth?.currentUser?.uid);
-      // await addDoc(collection(db,''))
-      console.log(user);
+      const userRef = doc(db, "users", auth?.currentUser?.uid);
 
-      await updateDoc(user, {
-        favorites: arrayUnion(book),
-      });
+      const user = await getDoc(userRef);
+      console.log(user.data());
+      if (user.exists()) {
+        if (!user.data().favorites.find((el) => el.id === book.id)) {
+          console.log('not foound');
+          
+          await updateDoc(userRef, {
+            favorites: arrayUnion(book),
+          });
+
+        } else {
+          console.log('found');
+          const arr = user.data().favorites;
+          const index = arr.findIndex(el=>el.id === book.id)
+
+          await updateDoc(userRef, {
+            favorites: arrayRemove(arr[index]),
+          });
+
+        }
+
+      }
     } catch (error) {
       console.log(error);
     }
@@ -68,9 +122,9 @@ export default function BookPage() {
             <button
               type="button"
               className={classes["add-toWishlist-btn"]}
-              onClick={() => addToWishList(book)}
+              onClick={() => toggleFavorites(book)}
             >
-              <i className="bi bi-bookmark-fill"></i>To Wishlist
+              <i className="bi bi-bookmark-fill"></i>{aBook?.addedToFavorites?'From':'To'} Wishlist
             </button>
           </div>
         </div>
