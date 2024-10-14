@@ -4,12 +4,60 @@ import Grid from "../components/BooksGrid/Grid";
 import FilterBooks from "../components/BooksGrid/FilterBooks";
 import { useEffect, useState } from "react";
 import { GENRES } from "../data/genres";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "../../config/firebase";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 export default function AllBooksPage() {
   const { books, currentPage, totalPages } = useLoaderData();
   const [pickedGenre, setPickedGenre] = useState("");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const q = searchParams.get("q");
+  const [allBooks, setAllBooks] = useState([]);
+  const [isloading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        getUser();
+      } else {
+        setAllBooks(() =>
+          books.map((book) => ({
+            ...book,
+            addedToFavorites: false,
+          }))
+        );
+      }
+      setIsLoading(false);
+    });
+
+    async function getUser() {
+      const userRef = doc(db, "users", auth?.currentUser?.uid);
+
+      const user = await getDoc(userRef);
+      if (user.exists()) {
+        setAllBooks(() =>
+          books.map((book) => ({
+            ...book,
+            addedToFavorites: user
+              .data()
+              .favorites.find((el) => el.id === book.id)
+              ? true
+              : false,
+          }))
+        );
+      }
+    }
+    return () => unsubscribe();
+  }, [books]);
+  
+ 
 
   function openPrevPage() {
     if (currentPage > 1) {
@@ -23,7 +71,7 @@ export default function AllBooksPage() {
   }
   return (
     <main className={classes.allbooks_main}>
-       <div className={classes.pagination_btns}>
+      <div className={classes.pagination_btns}>
         <button
           type="button"
           onClick={openPrevPage}
@@ -40,7 +88,11 @@ export default function AllBooksPage() {
         </button>
       </div>
       <FilterBooks genres={GENRES} setPickedGenre={setPickedGenre} />
-      <Grid books={books} pickedGenre={pickedGenre} />
+      {isloading || allBooks.length === 0 ? (
+        <p>Loading...</p>
+      ) : (
+        <Grid books={allBooks} pickedGenre={pickedGenre} />
+      )}
       <div className={classes.pagination_btns}>
         <button
           type="button"
@@ -72,7 +124,6 @@ export async function loader({ request, params }) {
       }`
     );
     if (!response.ok) {
-      console.log("not okay");
 
       throw json({ message: "Bad request" }, { status: 404 });
     }

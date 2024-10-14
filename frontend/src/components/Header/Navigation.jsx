@@ -6,19 +6,23 @@ import { useState } from "react";
 import AuthModal from "../Auth/Modal";
 import { useSelector } from "react-redux";
 import CartModal from "../Cart/CartModal";
-import { Form } from "react-router-dom";
+import { Form, useLocation, useNavigate } from "react-router-dom";
 import {
   motion,
   useMotionValueEvent,
   useScroll,
   useTransform,
 } from "framer-motion";
-export default function Navigation() {
+export default function Navigation({ setKey }) {
   const { scrollYProgress } = useScroll();
+
   const [openModal, setOpenModal] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  // const [key, setKey] = useState(0);
   const cart = useSelector((state) => state.cart.total);
-  // useMotionValueEvent(scrollYProgress, "change", (y) => console.log(y));
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const background = useTransform(
     scrollYProgress,
     [0, 0.076],
@@ -29,11 +33,13 @@ export default function Navigation() {
     [0, 0.076],
     ["blur(0px)", "blur(20px)"]
   );
+
   async function logout() {
     try {
       await signOut(auth);
-      console.log('logged out!!!');
-      
+      console.log("logged out!!!", location.pathname);
+      if (location.pathname !== "/") navigate("/");
+      else setKey((prev) => prev + 1);
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +50,7 @@ export default function Navigation() {
         <AuthModal
           openModal={openModal}
           closeModal={() => setOpenModal(false)}
+          setKey={setKey}
         />
       )}
       {isCartOpen && cart > 0 && (
@@ -79,12 +86,21 @@ export default function Navigation() {
             <i className="bi bi-cart4"></i>
             {cart}
           </NavItem>
-          <NavItem onClick={() => setOpenModal(true)}>
-            <i className="bi bi-person-circle"></i>
-          </NavItem>
-          <NavItem className="big" onClick={logout}>
-            Logout
-          </NavItem>
+          {auth.currentUser && (
+            <NavItem>
+              <i className="bi bi-person-circle"></i>
+            </NavItem>
+          )}
+          {!auth.currentUser && (
+            <NavItem onClick={() => setOpenModal(true)}>
+              <i className="bi bi-box-arrow-in-right"></i>
+            </NavItem>
+          )}
+          {auth.currentUser && (
+            <NavItem className="big" onClick={logout}>
+              <i className="bi bi-box-arrow-left"></i>
+            </NavItem>
+          )}
         </ul>
       </motion.nav>
     </>

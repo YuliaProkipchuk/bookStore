@@ -13,22 +13,70 @@ app.use((req, res, next) => {
 });
 // app.post('/file', async(req, res)=>{
 //     console.log(req.body);
-    
+
 //     await fs.writeFile('genres.json', JSON.stringify(req.body));
 //     res.send('okay')
 // })
-app.get('/prices', (req, res)=>{
-    res.send(PRICES) 
+app.get('/prices', (req, res) => {
+  res.send(PRICES)
 })
-// const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
-app.post('/create-checkout-session', async(req, res)=>{
-  try{
+app.post('/create-checkout-session', async (req, res) => {
+
+  const line_items = req.body.items.map(item => (
+    {
+      price_data: {
+        currency: 'uah',
+        product_data: {
+          name: item.title,
+          description: item.authors,
+          images: [item.image_url]
+        },
+        unit_amount: PRICES[item.id + 1] * 100,
+      },
+      quantity: item.quantity,
+    }
+  ))
+  try {
     const session = await stripe.checkout.sessions.create({
-
+      payment_method_types: ["card"],
+      shipping_address_collection: {
+        allowed_countries: ["US", "CA", "UA"],
+      },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              amount: 0,
+              currency: "uah",
+            },
+            display_name: "Free shipping",
+            // Delivers between 5-7 business days
+            delivery_estimate: {
+              minimum: {
+                unit: "business_day",
+                value: 5,
+              },
+              maximum: {
+                unit: "business_day",
+                value: 7,
+              },
+            },
+          },
+        },],
+      phone_number_collection: {
+        enabled: true,
+      },
+      line_items,
+      mode: 'payment',
+      success_url: `${process.env.CLIENT_URL}/checkout-success`,
+      cancel_url: `${process.env.CLIENT_URL}/`
     })
-  }catch(err){
-    res.status(500).send({error:err.message})
+    res.send({ url: session.url })
+  } catch (err) {
+    res.status(500).send({ error: err.message })
   }
 })
 app.listen(8080);

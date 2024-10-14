@@ -5,7 +5,15 @@
   background: var(--primary-color);
   height: 80px;
 }
+.header, .color-header{
 
+  height: 80px;
+  width: 100%;
+}
+.header{
+  position: fixed;
+  z-index: 999;
+}
 /* h1 {
   text-transform: uppercase;
   text-align: center;

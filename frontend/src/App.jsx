@@ -4,8 +4,10 @@ import "./App.css";
 import Root from "./pages/Root";
 import HomePage, { loader as homeLoader } from "./pages/Home";
 import Error from "./pages/Error";
-import BookPage, {loader as bookLoader} from "./pages/Book";
-import AllBooksPage, {loader as allBooksLoader} from "./pages/AllBooks";
+import BookPage, { loader as bookLoader } from "./pages/Book";
+import AllBooksPage, { loader as allBooksLoader } from "./pages/AllBooks";
+import CheckoutFail from "./components/CheckoutResults/CheckoutFail";
+import CheckoutSuccess from "./components/CheckoutResults/CheckoutSuccess";
 
 const router = createBrowserRouter([
   {
@@ -18,9 +20,11 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         loader: homeLoader,
       },
-      { path: "auth" },
-      {path:'books', element:<AllBooksPage/>, loader:allBooksLoader},
-      { path: "books/:bookId", element: <BookPage />, loader:bookLoader },
+      // { path: "auth" },
+      { path: "checkout-success", element: <CheckoutSuccess /> },
+      { path: "checkout-fail", element: <CheckoutFail /> },
+      { path: "books", element: <AllBooksPage />, loader: allBooksLoader },
+      { path: "books/:bookId", element: <BookPage />, loader: bookLoader },
     ],
   },
 ]);
