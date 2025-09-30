@@ -18,7 +18,6 @@ export default function Navigation({ setKey }) {
 
   const [openModal, setOpenModal] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  // const [key, setKey] = useState(0);
   const cart = useSelector((state) => state.cart.total);
   const location = useLocation();
   const navigate = useNavigate();
@@ -37,7 +36,6 @@ export default function Navigation({ setKey }) {
   async function logout() {
     try {
       await signOut(auth);
-      console.log("logged out!!!", location.pathname);
       if (location.pathname !== "/") navigate("/");
       else setKey((prev) => prev + 1);
     } catch (error) {
@@ -81,7 +79,6 @@ export default function Navigation({ setKey }) {
           <NavItem className="big" link="books">
             Books
           </NavItem>
-          {/* <NavItem className='big'>Contact</NavItem> */}
           <NavItem onClick={() => setIsCartOpen(true)}>
             <i className="bi bi-cart4"></i>
             {cart}

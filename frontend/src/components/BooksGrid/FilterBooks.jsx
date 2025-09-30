@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import classes from './BooksGrid.module.css'
 export default function FilterBooks({genres, setPickedGenre}){
-    console.log(genres);
     
     const [isClicked, setIsClicked] = useState(false)
     return <div className={classes.filter_section}>

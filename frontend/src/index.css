@@ -35,7 +35,6 @@ a{
 dialog{
   position: fixed;
   top: 7%;
-  /* left: 18%; */
 }
 dialog::backdrop{
   background: #000000c7;

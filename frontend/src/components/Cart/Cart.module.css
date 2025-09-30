@@ -5,7 +5,6 @@
     border: none;
     color: black;
     left: 13%;
-    /* background: rgb(255, 255, 255); */
 }
 
 .cart {
@@ -23,7 +22,6 @@
 .cart_item {
     width: 95%;
     border-radius: 5px;
-    /* background: #eeeeee; */
     box-shadow: -5px 5px 10px #cccccc,
         5px -5px 10px #ffffff;
     height: 150px;
@@ -47,13 +45,11 @@
 .cart_item_info {
     width: 80%;
     height: 100%;
-    /* border-left: 1px solid gray; */
     position: relative;
     padding-left: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* gap: 15px; */
 
 }
 

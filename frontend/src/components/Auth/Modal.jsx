@@ -15,7 +15,6 @@ export default function AuthModal({ openModal, closeModal, setKey }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // const [key, setKey] = useState(0)
   const [isRegistered, setIsRegistered] = useState(true);
   const [userData, setUserData] = useState({
     username: "",
@@ -49,7 +48,6 @@ export default function AuthModal({ openModal, closeModal, setKey }) {
         name:userData.username,
         email: userData.email,
         favorites:[]
-        // password:userData.password
       });
     
       closeModal();
@@ -67,9 +65,7 @@ export default function AuthModal({ openModal, closeModal, setKey }) {
         userData.password
       );
       const user = userCredential.user;
-      console.log(user);
       closeModal();
-      console.log('logged in');
       if(location.pathname!=='/') navigate('/');
       else setKey(prev=>prev+1)
       

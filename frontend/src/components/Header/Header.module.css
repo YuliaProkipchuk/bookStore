@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
 
 .color-header {
-  /* padding: 20px; */
   background: var(--primary-color);
   height: 80px;
 }
@@ -14,13 +13,6 @@
   position: fixed;
   z-index: 999;
 }
-/* h1 {
-  text-transform: uppercase;
-  text-align: center;
-  font-family: 'Comfortaa', cursive;
-  color: #5b4c5f;
-  font-size: 40px;
-} */
 
 .bi-book-half {
   margin-right: 5px;
@@ -35,27 +27,6 @@ nav {
 
 }
 
-/* nav::before{
-    content:'';
-    width: 100%;
-    position: absolute;
-    height: 1px;
-    background-color: #5b4c5f;
-    top: 1px;
-    animation-name: show;
-    animation-duration: 1s;
-}
-nav::after{
-    content:'';
-    width: 100%;
-    position: absolute;
-    height: 1px;
-    background-color: #5b4c5f;
-    bottom: 2px;
-    animation-name: show;
-    animation-duration: 1s;
-    right: 0;
-} */
 .navigation {
   display: flex;
   align-items: center;
@@ -65,7 +36,6 @@ nav::after{
   margin: 0 auto;
   height: 70px;
   width: 80%;
-  /* margin-top: 35px; */
   font-family: 'Comfortaa', cursive;
   line-height: 70px;
   color: #fff;
@@ -120,11 +90,8 @@ nav::after{
   height: 80vh;
   display: flex;
   justify-content: center;
-  /* width: calc(100% - 40px); */
-  /* padding: 20px 0; */
   margin-bottom: 40px;
   position: relative;
-  /* margin: 20px; */
   width: 100%;
 }
 
@@ -171,7 +138,6 @@ nav::after{
 .sale__offer__paragraph {
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
-  /* height: 25%; */
 }
 
 .sale__offer__button {

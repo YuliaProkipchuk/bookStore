@@ -20,7 +20,6 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         loader: homeLoader,
       },
-      // { path: "auth" },
       { path: "checkout-success", element: <CheckoutSuccess /> },
       { path: "checkout-fail", element: <CheckoutFail /> },
       { path: "books", element: <AllBooksPage />, loader: allBooksLoader },

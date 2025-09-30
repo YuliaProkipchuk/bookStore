@@ -27,18 +27,14 @@ export default function BookPage() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("User is signed in:", user.uid);
         getUser();
       } else {
-        console.log("No user is signed in");
         setABook({
           ...book,
           addedToFavorites:false
         });
-      // setAddedToFavorites(false)
 
       }
-      // setIsLoading(false);
     });
 
     async function getUser() {
@@ -61,17 +57,14 @@ export default function BookPage() {
       const userRef = doc(db, "users", auth?.currentUser?.uid);
 
       const user = await getDoc(userRef);
-      console.log(user.data());
       if (user.exists()) {
         if (!user.data().favorites.find((el) => el.id === book.id)) {
-          console.log('not foound');
           
           await updateDoc(userRef, {
             favorites: arrayUnion(book),
           });
 
         } else {
-          console.log('found');
           const arr = user.data().favorites;
           const index = arr.findIndex(el=>el.id === book.id)
 
@@ -175,7 +168,6 @@ export async function loader({ params, request }) {
 
     similar = similar.filter((b) => b.id !== book.id);
     similar.forEach((book) => (book.price = prices[book.id + 1]));
-    console.log(similar);
 
     return { book, similar };
   } catch (error) {

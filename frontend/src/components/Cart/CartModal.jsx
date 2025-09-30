@@ -13,8 +13,7 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
-// import { loadStripe } from '@stripe/stripe-js';
-// import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+
 export default function CartModal({ isOpen, closeModal }) {
   const cart = useSelector((state) => state.cart);
   const dialogRef = useRef(null);
@@ -27,15 +26,12 @@ export default function CartModal({ isOpen, closeModal }) {
   }, [isOpen]);
 
   async function createOrder() {
-    console.log(cart);
-    // console.log(doc(collection(db, 'orders')).id);
     const order = {
       userID: auth?.currentUser?.uid || doc(collection(db, "orders")).id,
       date: new Date(),
       status: "payed",
       ...cart,
     };
-    console.log(order);
     try {
       fetch(`http://localhost:8080/create-checkout-session`, {
         method: "POST",
@@ -51,7 +47,6 @@ export default function CartModal({ isOpen, closeModal }) {
           }
         }).catch(err=>console.log(err));
 
-      // await addDoc(collection(db, 'orders'), order);
     } catch (error) {
       console.log(error);
     }

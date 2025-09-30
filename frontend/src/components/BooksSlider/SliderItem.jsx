@@ -23,16 +23,13 @@ export default function SliderItem({ book }) {
       const userRef = doc(db, "users", auth?.currentUser?.uid);
 
       const user = await getDoc(userRef);
-      console.log(user.data());
       if (user.exists()) {
         if (!user.data().favorites.find((el) => el.id === book.id)) {
-          console.log("not foound");
 
           await updateDoc(userRef, {
             favorites: arrayUnion(book),
           });
         } else {
-          console.log("found");
           const arr = user.data().favorites;
           const index = arr.findIndex((el) => el.id === book.id);
 
@@ -45,7 +42,6 @@ export default function SliderItem({ book }) {
     } catch (error) {
       console.log(error);
     }
-    // setAddedToFavorites((prev) => !prev);
   }
   return (
     <div className={classes.book_card}>
@@ -71,7 +67,6 @@ export default function SliderItem({ book }) {
           >
             <i className="bi bi-cart4"></i> Add to cart
           </div>
-          {/* <i class="bi bi-heart"></i> */}
           <i
             className="bi bi-heart-fill"
             style={{

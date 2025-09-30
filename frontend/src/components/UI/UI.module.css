@@ -2,7 +2,6 @@
     width: 50%;
     height: 100%;
     background-color: rgb(163, 218, 247);
-    /* transform-style: preserve-3d; */
     overflow: hidden;
     position: relative;
 }
@@ -66,16 +65,6 @@
 
 @keyframes float1 {
 
-    /* 0%, 100%{
-     transform: translateX(300px) translateY(60px) translateZ(-44px) rotateX(0deg) rotateY(180deg) ;
-    }
-    40%{
-        transform: translateX(200px) translateY(260px) translateZ(44px)  rotateZ(7deg) rotateX(-160deg) ;
-    }
-    70%{
-    transform: translateX(50px) translateY(20px) translateZ(-4px) rotateX(0deg)  ;
-
-    } */
     0% {
         transform: translateX(300px) translateY(60px) translateZ(-44px) rotateX(0deg) rotateY(180deg) rotateZ(0deg);
     }
@@ -117,10 +106,6 @@
         transform:  translateX(200px) translateY(20px) translateZ(-44px) rotateZ(180deg) rotateX(-160deg);
 
     }
-    /* 50%{
-        transform: translateZ(-44px) translateX(200px) translateY(20px) rotateZ(7deg) rotateX(-160deg);
-
-    } */
     100% {
         transform:  translateX(200px) translateY(20px) translateZ(-44px) rotateZ(360deg) rotateX(-160deg);
 
@@ -128,7 +113,6 @@
 }
 .book{
     height: 30px;
-    /* width: 100%; */
 }
 .book_img::before{
     content: '';
@@ -143,19 +127,11 @@
 .book_img{
     --rating:0;
    position: relative;
-    /* background: 
-    #fff; */
-    /* url(../../assets/star-fill.svg); */
     background: url(../../assets/star.svg);
     background-size: auto 100%;
     background-position: top;
-    /* background-size: contain; */
     height: 30px;
     width: 150px;
     background-blend-mode: multiply;
-    /* mask-image: url(../../assets/star-fill.svg);
-    mask-size: auto 100%; */
-    /* mask-border: 2px solid black; */
-    /* transform: rotateZ(40deg) rotateY(20deg); */
     overflow: hidden;
 }

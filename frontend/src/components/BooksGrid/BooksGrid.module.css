@@ -26,15 +26,9 @@
 }
 .filter_section{
     height: 300px;
-    /* min-width: 15%; */
     margin: 20px auto;
-
-    /* background-color: var(--primary-color); */
-    /* display: flex; */
 }
 .filter_section button{
-    /* height: 30px; */
-    /* align-self: flex-start; */
     padding: .5rem 2rem;
     font-size: 1rem;
     background-color: rgb(1, 1, 24);

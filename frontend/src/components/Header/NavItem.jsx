@@ -1,4 +1,3 @@
-// import { NavLink } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import classes from "./Header.module.css";
 export default function NavItem({ children, className, link = "", ...props }) {

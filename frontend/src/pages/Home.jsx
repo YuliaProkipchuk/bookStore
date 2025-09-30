@@ -79,12 +79,10 @@ export async function loader({ request, params }) {
       "https://example-data.draftbit.com/books?_limit=10"
     );
     if (!response.ok) {
-      console.log("not okay");
 
       throw json({ message: "Bad request" }, { status: 404 });
     }
     const data = await response.json();
-    console.log(data);
     const pricesRespponse = await fetch("http://localhost:8080/prices");
     const prices = await pricesRespponse.json();
     const books = data.map((book) => ({

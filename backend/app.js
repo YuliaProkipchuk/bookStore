@@ -11,12 +11,7 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
   next();
 });
-// app.post('/file', async(req, res)=>{
-//     console.log(req.body);
 
-//     await fs.writeFile('genres.json', JSON.stringify(req.body));
-//     res.send('okay')
-// })
 app.get('/prices', (req, res) => {
   res.send(PRICES)
 })
@@ -53,7 +48,6 @@ app.post('/create-checkout-session', async (req, res) => {
               currency: "uah",
             },
             display_name: "Free shipping",
-            // Delivers between 5-7 business days
             delivery_estimate: {
               minimum: {
                 unit: "business_day",

@@ -14,7 +14,6 @@ export default function Error(){
         }
     }
     return <>
-    {/* <Navigation/> */}
     <h1>error!!!</h1>
     
     </>
